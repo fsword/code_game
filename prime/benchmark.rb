@@ -16,8 +16,13 @@ result = {
   8 => 5761455
 }
 
-(7..8).each do |i|
+(5..8).each do |i|
   Benchmark.bm do |x| 
-    x.report((10**i).to_s){ raise 'result wrong!' if prime(10**i)!=result[i] }
+    x.report((10**i).to_s){
+      a = prime(10**i)
+      if a != result[i]
+        puts "wrong: #{a} - #{result[i]}"
+      end
+    }
   end
 end
